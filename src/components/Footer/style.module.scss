@@ -1,0 +1,284 @@
+.footerContainer .footer {
+  min-height: 603px;
+  box-sizing: border-box;
+  position: relative;
+  color: #fff;
+  font-family: 'OpenSans-Regular';
+  background-image: linear-gradient(to right, #1172bd 0%, #00c4c6 100%);
+}
+.footerContainer .footer_inner {
+  padding: 2% 4.5% 0 4.5%;
+}
+.footerContainer .footer .row_block {
+  margin: 0 auto;
+  width: 93%;
+}
+.footerContainer .footer .text_lable_container {
+  width: 88%;
+  margin: 0 auto;
+}
+
+.test_socialIcons{
+  font-size: 26px;
+    display: flex;
+    color: var(--textColor);
+    width: 30%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: auto;
+    justify-content: flex-start;
+}
+.test_socialIcons .twiter_icon{
+  color: #ffffff;
+  margin-right: 15px;
+}
+.test_socialIcons .fb_icon{
+  color: #ffffff;
+  margin-right: 15px;
+}
+.test_socialIcons .insta_icon{
+  color: #ffffff;
+  margin-right: 15px;
+}
+
+.footerMenuHolder{
+  width: 100%;
+  display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.footerMenuHolder ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+ padding-left: 20px;
+}
+.footerMenuHolder li a {
+
+    font-family: "OpenSans-Regular";
+    color: var(--textColor);
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+
+}
+.footerMenuHolder li a:hover {
+    color: var(--primaryColor);
+}
+
+.footerContainer .footer .text_lable_container,
+.footerContainer .footer .img_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+.footerContainer .footer .text_lable_container span {
+  padding: 15px 23px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1rem;
+  display: inline-block;
+  font-family: inherit;
+}
+.footerContainer .footer .img_container img {
+  padding: 15px 23px 15px 0;
+}
+.footerContainer .footer .footer_bottom {
+  width: 100%;
+  height: 98px;
+  background: #0a699d;
+  margin-top: 20px;
+  line-height: 90px;
+  position: absolute;
+  bottom: 0;
+}
+.footerContainer .footer .social_icon_block {
+  width: 12%;
+  text-align: center;
+  float: left;
+}
+.footerContainer .footer .orc_block {
+  width: 20%;
+  float: right;
+}
+.footerContainer .footer .orc_block .footer_badge {
+  border: 1px solid red;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 4px 3px;
+  margin-right: 10px;
+}
+.footerContainer .footer .copy_rights_block {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+}
+.footer_content_logo {
+  padding: 10px 0;
+  border-top: 1px solid #5dd2d9;
+  margin-top: 15px;
+}
+
+.footer_content_logo .inner_container {
+  text-align: center;
+}
+.footer_content_logo .inner_container p {
+  color: #84cee1;
+  font-family: 'OpenSans-Regular';
+  font-size: 16px;
+}
+.logoWraper{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.paymenyCardHolder{
+  width: 84px;
+  height: 40px;
+  /* margin-left: 1%; */
+  margin-bottom: 1%;
+  position: relative;
+  /* border: 2px solid red; */
+  margin-right: 1%;
+  cursor: pointer;
+}
+.paymenyCardHolder img{
+  border-radius: 4px;
+}
+.FlogoHolder{
+  width: 100%;
+  height: 100%;
+  min-width: 116px;
+  min-height: 72px;
+  position: relative;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+.logo {
+ // padding-top: 25px;
+ width: 100%;
+ height: 100%;
+ min-width: 116px;
+ min-height: 72px;
+ position: relative;
+ cursor: pointer;
+ margin: 1rem;
+}
+.footerContainer .footer .social_icon_block .socialIcon {
+  padding: 0 4%;
+}
+.footerContainer .footer .copy_rights_block .ellipse {
+  padding-left: 5px;
+}
+.footerContainer .footer .copy_rights_block.mobile_view {
+  display: none;
+}
+@media only screen and (max-width: 769px) {
+  .footerContainer .footer .footer_bottom {
+    position: unset;
+    bottom: unset;
+    font-size: 14px;
+  }
+  .footerContainer .footer .row_block {
+    width: 100%;
+  }
+  .footerContainer .footer .social_icon_block {
+    width: 25%;
+  }
+  .footerContainer .footer .social_icon_block .socialIcon {
+    padding: 0 8%;
+  }
+  .footerContainer .footer .orc_block {
+    width: 25%;
+    line-height: 50px;
+  }
+  .footerContainer .footer .copy_rights_block {
+    bottom: -14px;
+    text-align: right;
+    width: 95%;
+  }
+  .footerContainer .footer .copy_rights_block .ellipse,
+  .footerContainer .footer .copy_rights_block .copy_rights_year {
+    padding-right: 7%;
+  }
+  .footer_content_logo .inner_container {
+    padding: 0 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .footerContainer .footer_inner {
+    padding: 2% 3.5% 0 4.5%;
+  }
+  .footerContainer .footer .img_container img {
+    padding: 15px 5% 15px 0;
+  }
+  .footerContainer .footer .text_lable_container span {
+    width: 50%;
+    padding: 15px 0;
+    font-size: 14px;
+  }
+  .footerContainer .footer .text_lable_container {
+    width: 100%;
+  }
+  .footerContainer .footer .social_icon_block {
+    width: 45%;
+  }
+  .footerContainer .footer .orc_block {
+    width: 40%;
+    float: left;
+    position: absolute;
+    left: 25px;
+    bottom: 0;
+  }
+  .footerContainer .footer .footer_bottom {
+    line-height: 65px;
+  }
+  .footerContainer .footer .copy_rights_block.mobile_view {
+    display: block;
+  }
+  .footerContainer .footer .copy_rights_block.desktop_view {
+    display: none;
+  }
+
+  .footerContainer .footer .copy_rights_block {
+    width: 45%;
+    height: 98px;
+    display: flex;
+    flex-direction: column;
+    line-height: 24px;
+    text-align: left;
+    right: 0;
+    font-size: 14px;
+  }
+  .footerContainer .footer .copy_rights_block .ellipse {
+    padding-left: 0;
+  }
+}
+@media only screen and (max-width: 376px) {
+  .footerContainer .footer .footer_bottom,
+  .footerContainer .footer .copy_rights_block {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 321px) {
+  .footerContainer .footer .img_container img {
+    padding: 15px 3% 15px 0;
+  }
+  .footerContainer .footer .footer_bottom,
+  .footerContainer .footer .copy_rights_block {
+    font-size: 10px;
+  }
+  .footerContainer .footer .copy_rights_block {
+    width: 43%;
+  }
+}
