@@ -68,8 +68,8 @@ border-radius: 47px;
 }
 
 .menuItemName:hover{
- background:var(--btnSelectColor);
-//background-color: #E92284;
+//  background:var(--btnSelectColor);
+
 }
 .menuItemName span{
  font-family: 'OpenSans-Regular';
@@ -159,9 +159,7 @@ padding: 1rem;
   }
   
   .menuItem:hover{
-    //color: var(--secondarytxtColor);
-    color: var(--primaryColor);
-   // border:2px solid var(--primaryColor);
+  //  color: var(--primaryColor);
   }
   // .menuItem:focus {
   //   color: var(--primaryTxt);
@@ -204,11 +202,9 @@ padding: 1rem;
 background-color:var(--secondaryBGcolor);
 }
 .subMenuItem:hover .itemName li a {
-// color:var(--secondarytxtColor);
-// font-weight: bold;
-// background: var(--primaryColor);
-color: #E92284 !important;
-    // background-color: var(--primaryColor);;
+
+//color: #E92284 !important;
+
 
 
 }

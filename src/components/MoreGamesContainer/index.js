@@ -37,7 +37,7 @@ const MoreGamesContainer = (props) => {
 
     const [noDataFound, setNoDataFound] = useState(false);
 
- 
+
 
 
     const [rtpList, setRTPList] = useState([
@@ -67,30 +67,31 @@ const MoreGamesContainer = (props) => {
 
 
     const getMoreGames = async (min, max, totalLeng, filterHTTPObj) => {
-        let categeryID;
+        let categeryID = "1"
         let categeries = [];
+
+        //   console.log(router.query.index , "____________test______",router.query.index.length-1);
+        //  console.log(router.query.index , "_________dd");
+
+        //---always get last route name
+        let menuIndex = router.query.index.length - 1;
+
 
         if (router.query.index[0] == "providers") {
             filterHTTPObj["game_providers"] = [router.query.index[1]];
             categeries = [];
-        } else {
-            categeryID = router.query.index[1] ? router.query.index[1] : "1";
-            categeries.push(parseInt(categeryID));
+        } else if (props.cmsPlainMenu.length > 0) {
+
+            const currentMenuObj = props.cmsPlainMenu && props.cmsPlainMenu.filter(menuObj => menuObj.permalink == router.query.index[menuIndex]);
+
+            if (currentMenuObj != undefined && currentMenuObj[0] != undefined && currentMenuObj[0].id != undefined) {
+                // console.log(currentMwnuObj[0].id, "_____tt_currentMwnuObj___---testing" );
+                // categeryID = router.query.index[1] ? router.query.index[1] : "1";
+
+                categeryID = currentMenuObj[0].id;
+                categeries.push(parseInt(categeryID));
+            }
         }
-
-        // let categeryID = router.query.index[1] ? router.query.index[1] : "1";
-
-        if (min > totalLeng) {
-            //  handleDisableScroll(); disable load more button
-            // return;
-        }
-
-        // if player login , then onlysession id will be sent , inorder to get faviourate sttaus
-        // let sessionObj = {};
-        // if (localStorage && localStorage.tocken) {
-        //     sessionObj["session_id"] = localStorage.tocken;
-        // }
-
 
         let obj = {
             params: {
@@ -101,6 +102,11 @@ const MoreGamesContainer = (props) => {
                 // "api_key": process.env.NEXT_PUBLIC_API_KEY
             }
         }
+
+        if (categeries.length === 0) {
+            return;
+        }
+
         const res = await request(`/api/getGames`, obj);
 
         if (res.error != undefined && res.error && res.error.code) {
@@ -114,6 +120,7 @@ const MoreGamesContainer = (props) => {
                 setNoDataFound(true);
             }
         }
+
     }
 
     useEffect(() => {
@@ -137,7 +144,8 @@ const MoreGamesContainer = (props) => {
         clearAllFilter();
         localStorage && localStorage.setItem("backRoute", router.asPath);
 
-    }, [router.query]);
+        // }, [router.query ]);
+    }, [router.query, props.cmsPlainMenu]);
 
     const getFeatures = async () => {
         let obj = {
@@ -250,11 +258,11 @@ const MoreGamesContainer = (props) => {
 
 
 
-    const updateFavSelection = async (gameObj , isFav) => {
-        
+    const updateFavSelection = async (gameObj, isFav) => {
+
         let isValid = await validateSession();
-    
-        if(isValid){
+
+        if (isValid) {
             let obj = {
                 params: {
                     "game_config_id": gameObj.game_config_id,
@@ -265,42 +273,42 @@ const MoreGamesContainer = (props) => {
                 }
             }
             const res = await request(`/api/favouriates`, obj);
-    
+
             if (res.error != undefined && res.error && res.error.code) {
             } else if (res.result) {
-    
+
             }
-        }else{
+        } else {
             // reset to login and show login window
-           // setSession(false);
+            // setSession(false);
             PubSub.publish('unsetFav', "");
             PubSub.publish('OpenLoginWndow', "");
-            
+
         }
 
-      
+
 
     }
 
-    const validateSession = async() =>{
+    const validateSession = async () => {
         const isValidSession = await request(`/api/player/validateSession`, {});
-        if(isValidSession && isValidSession.result && isValidSession.result.is_valid){
+        if (isValidSession && isValidSession.result && isValidSession.result.is_valid) {
             return true;
-        }else{
+        } else {
             return false;
         }
- 
+
     }
 
-    const onOpenGame = async(gameURL) => {
+    const onOpenGame = async (gameURL) => {
         let isValid = await validateSession();
-    
-        if(isValid){
+
+        if (isValid) {
             // router.push(gameURL, undefined, {
             //     scroll: true
             //  });
             router.push(gameURL);
-        }else{
+        } else {
             // reset to login and show login window
             PubSub.publish('OpenLoginWndow', "");
         }
@@ -484,7 +492,7 @@ const MoreGamesContainer = (props) => {
                         {allMoreGames && allMoreGames.map((obj, indx) =>
                             // <GameItem key={indx} gameObj={obj} device = {props.deviceType}/>
                             <div key={indx} className={styles.gameTileWraper}>
-                                <GameCard key={indx} gameObj={obj} versNum={props.appConfigObj.version} showInfo={props.appConfigObj.showgameInfo} gameType="6x" updateFavSelection={updateFavSelection} onOpenGame={onOpenGame} currency={minMaxMoreLoad.currency} pageType={"moreGames"}/>
+                                <GameCard key={indx} gameObj={obj} versNum={props.appConfigObj.version} showInfo={props.appConfigObj.showgameInfo} gameType="6x" updateFavSelection={updateFavSelection} onOpenGame={onOpenGame} currency={minMaxMoreLoad.currency} pageType={"moreGames"} />
                             </div>
                         )}
                         {(minMaxMoreLoad.min < minMaxMoreLoad.totalCount) ? <div className={styles.loadMoreWraper}><div className={styles.loadMoreGames} onClick={onLoadMoregames}>{"Load More Games"}</div></div> : ""}

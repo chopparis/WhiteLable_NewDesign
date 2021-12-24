@@ -57,7 +57,7 @@ const CarouselWidget = (props) => {
     showIndicators: false,
     swipeable: true,
     emulateTouch: true,
-    autoPlay: false,
+    autoPlay: true,
   };
 
   return (

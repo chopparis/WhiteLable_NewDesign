@@ -224,7 +224,7 @@ const WLGamesSection = (props) => {
                 {minMax.totalCount > props.categryObj.no_of_tiles ? <div className={styles.BtnsHolder}>
                     <div className={styles.moreGamesBtn} onClick={OpenMoreGames}>
 
-                        <Link href={"/games/" + props.categryObj.permalink + "/" + props.categryObj.id}>
+                        <Link href={"/games/" + props.categryObj.permalink}>
                             <span><a>{t("moregames")}</a></span>
                             {/* <a>{props.propObj.display_name}</a> */}
                         </Link>

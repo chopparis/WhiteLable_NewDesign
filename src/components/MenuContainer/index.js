@@ -75,10 +75,13 @@ const MenuContainer = (props) => {
 // console.log(gameType.id , "________________IDDD")
           
           if(router.query.index != undefined && router.query.index.length > 0 ){
+         //---index of 0 always mainMenu
+            let currentManuName = router.query.index[0];
+
             // let menuObj = filterdList.find(o => o.id == router.query.index[1]);
-            let menuObj = filterdList.find(o => o.id == gameType.id);
+            let menuObj = filterdList.find(o => o.permalink == currentManuName);
             if( menuObj && menuObj.subMenu){
-              // console.log(menuObj['subMenu'] , "_________--subMenu");
+            //  console.log(menuObj['subMenu'] , "_________--subMenu");
               setSubMenuItems(menuObj['subMenu']);
             }
           }
@@ -94,11 +97,11 @@ const MenuContainer = (props) => {
     // setSubMenuItems(subMenuList);
 
 
-    setTimeout(() => {
-      if(phoneInputRef && phoneInputRef.current && phoneInputRef.current.scrollWidth != null ){
-        setHasScoll(phoneInputRef.current.scrollWidth > phoneInputRef.current.clientWidth);
-      }
-    }, 500)
+    // setTimeout(() => {
+    //   if(phoneInputRef && phoneInputRef.current && phoneInputRef.current.scrollWidth != null ){
+    //     setHasScoll(phoneInputRef.current.scrollWidth > phoneInputRef.current.clientWidth);
+    //   }
+    // }, 500)
 
   }, [props.menuList, router])
 

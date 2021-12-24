@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './style.module.scss'
 import PubSub from 'pubsub-js';
 import Link from 'next/link';
@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 const MenuItem = (props) => {
   const router = useRouter();
-
+  const [isMenuMode, setMenuMode] = useState(false);
   const onPageOpen = (e) => {
    // PubSub.publish("OnMenuSelection", e);
     // router.push("/games/" + props.propObj.permalink)
@@ -25,11 +25,21 @@ const MenuItem = (props) => {
      return props.routPath;
    }
   }
-
+  useEffect(() => {
+    // console.log(props.propObj.permalink , "_____________" ,  router.query.index[1])
+    if(router.query.index && router.query.index.length > 0){
+      if (props.propObj.permalink == router.query.index[0]) {
+        setMenuMode(true);
+       }else{
+        setMenuMode(false);
+       }
+    }
+     
+   }, [router])
   return (
     <div className={styles.menuItem} onClick={() => onPageOpen(props.propObj.name)}>
      
-      <div className={`${styles.menuItemName} ${(getRoutePath() == props.propObj.permalink ) ? styles.setBgColor : styles.menuItemName}  `} >
+      <div className={`${styles.menuItemName} ${(isMenuMode ) ? styles.setBgColor : styles.menuItemName}  `} >
         <ul>
           <li>
             {/* <Link href={"/games/" + props.propObj.permalink}>
@@ -38,8 +48,8 @@ const MenuItem = (props) => {
 
 <Link
             href={{
-              pathname: "/games/"  + props.propObj.permalink + "/" + props.propObj.id ,
-              // pathname: "/games/"  + props.propObj.permalink,
+              // pathname: "/games/"  + props.propObj.permalink + "/" + props.propObj.id ,
+               pathname: "/games/"  + props.propObj.permalink,
               // query: { slug: "Hello worls" },
             }}
           >
@@ -48,7 +58,7 @@ const MenuItem = (props) => {
           </li>
         </ul>
       </div>
-     {(getRoutePath() == props.propObj.permalink ) ?  <div className={styles.down_menu_triangle}></div> : "" }
+     {(isMenuMode ) ?  <div className={styles.down_menu_triangle}></div> : "" }
     </div>
 
   );

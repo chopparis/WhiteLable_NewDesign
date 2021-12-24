@@ -92,6 +92,19 @@ export const getLangLable = str => {
 };
 
 export const formateCMSMenuList = (dynamicMenuObj, homeCategory) => {
+    let faviourates =  {
+        "name": "favourites",
+        "display_name": "Favourites",
+        "id":99,
+        "permalink":"favourites",
+        "iconPath": "menuicons/home.svg",
+        "pageId": "favourites",
+        "showInMainMenu": true,
+        "subMenu": [],
+        "gameRoute":""
+
+
+     };
     let plainCMSList = [];
     if (dynamicMenuObj && dynamicMenuObj.menu) {
         let cmsMenuLeng = dynamicMenuObj && dynamicMenuObj.menu;
@@ -108,13 +121,14 @@ export const formateCMSMenuList = (dynamicMenuObj, homeCategory) => {
         // console.log(plainCMSList , "__UTITLIY")
 
     }
-    if (homeCategory & homeCategory != undefined) {
+    
+    if (homeCategory && homeCategory != undefined) {
         let homeCatLeng = homeCategory.length;
         for (let h = 0; h < homeCatLeng; h++) {
             plainCMSList.push(homeCategory[h])
         }
     }
-
+    plainCMSList.push(faviourates);
 
     return plainCMSList;
 
@@ -135,7 +149,8 @@ export const formateMenuItems = (dynamicMenuObj, staticMenuList) => {
                 for (const skey in subMenuList) {
                     // console.log(subMenuList[skey]["permalink"] , "__sstt___--finalMenuList____");
                     subMenuList[skey]["permalink"] = subMenuList[skey]["permalink"].replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
-                    subMenuList[skey]["parentId"] = dynaimcMenu[key]["id"]
+                    subMenuList[skey]["parentId"] = dynaimcMenu[key]["id"];
+                    subMenuList[skey]["parent_permaLink"] = dynaimcMenu[key]["permalink"]
                     //     dynaimcMenu[skey]["subMenu"]["permalink"] =  dynaimcMenu[skey]["subMenu"]["permalink"].replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
                 }
 

@@ -243,8 +243,8 @@ const NewSideNav = (props) => {
 
                                                 </Link> : <Link
                                                     href={{
-                                                        pathname: "/games/" + subObj.permalink + "/" + subObj.id,
-                                                        // pathname: "/games/"  + props.propObj.permalink,
+                                                        // pathname: "/games/" + subObj.permalink + "/" + subObj.id,
+                                                        pathname: "/games/" + obj.permalink + "/" + subObj.permalink,
                                                         // query: { slug: "Hello worls" },
                                                     }}
                                                 >
@@ -270,8 +270,8 @@ const NewSideNav = (props) => {
 
                                     <Link
                                         href={{
-                                            pathname: "/games/" + obj.permalink + "/" + obj.id,
-                                            // pathname: "/games/"  + props.propObj.permalink,
+                                           // pathname: "/games/" + obj.permalink + "/" + obj.id,
+                                             pathname: "/games/"  + obj.permalink,
                                             // query: { slug: "Hello worls" },
                                         }}
                                     >
