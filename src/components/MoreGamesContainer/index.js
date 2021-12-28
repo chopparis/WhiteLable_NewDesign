@@ -103,23 +103,23 @@ const MoreGamesContainer = (props) => {
             }
         }
 
-        if (categeries.length === 0) {
-            return;
-        }
+        // console.log(categeries[0] , "__________--categeries[0]")
+       // if(categeries[0] !=undefined){
+            const res = await request(`/api/getGames`, obj);
 
-        const res = await request(`/api/getGames`, obj);
-
-        if (res.error != undefined && res.error && res.error.code) {
-        } else if (res.result) {
-            let gamesList = res.result;
-            if (gamesList.games.length > 0) {
-                // setSearchResults(gamesList)
-                setMoreGamesChunk(gamesList);
-
-            } else {
-                setNoDataFound(true);
+            if (res.error != undefined && res.error && res.error.code) {
+            } else if (res.result) {
+                let gamesList = res.result;
+                if (gamesList.games.length > 0) {
+                    // setSearchResults(gamesList)
+                    setMoreGamesChunk(gamesList);
+    
+                } else {
+                    setNoDataFound(true);
+                }
             }
-        }
+        //}
+       
 
     }
 
@@ -141,11 +141,28 @@ const MoreGamesContainer = (props) => {
 
 
     useEffect(() => {
-        clearAllFilter();
         localStorage && localStorage.setItem("backRoute", router.asPath);
-
+        let currentIndx = router.query.index.length - 1;
+        console.log()
+        let menuObj = props.cmsPlainMenu.find(o => o.permalink == router.query.index[currentIndx] );
+        if (menuObj && menuObj.display_name) {
+            setGameTitle(menuObj.display_name);
+        }
+        clearAllFilter();
+    
         // }, [router.query ]);
-    }, [router.query, props.cmsPlainMenu]);
+    }, [router.query , props.cmsPlainMenu]);
+
+    //   useEffect(() => {
+    //   //  localStorage && localStorage.setItem("backRoute", router.asPath);
+    //     let currentIndx = router.query.index.length - 1;
+    //     let menuObj = props.cmsPlainMenu.find(o => o.permalink == router.query.index[currentIndx] );
+    //     if (menuObj && menuObj.display_name) {
+    //         setGameTitle(menuObj.display_name);
+    //     }
+    //     //clearAllFilter();
+    // }, [props.cmsPlainMenu]);
+
 
     const getFeatures = async () => {
         let obj = {
@@ -185,13 +202,7 @@ const MoreGamesContainer = (props) => {
         }
     }
 
-    useEffect(() => {
-        //console.log(props.cmsPlainMenu , "_______--props.cmsPlainMenu");
-        let menuObj = props.cmsPlainMenu.find(o => o.id == router.query.index[1]);
-        if (menuObj && menuObj.display_name) {
-            setGameTitle(menuObj.display_name);
-        }
-    }, [props.cmsPlainMenu]);
+  
 
 
     useEffect(() => {

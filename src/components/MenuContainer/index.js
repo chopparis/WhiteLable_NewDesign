@@ -31,6 +31,7 @@ const MenuContainer = (props) => {
       //  console.log( "<<_________obj.permalink_>>" , router.query.index , "____---router.query" , router.query , "_______" , router)
 
     let tempList = [...props.menuList];
+    // console.log(tempList , "________----tempListtempListtempList")
     const filterdList = tempList && tempList.filter(function (e) { return e.showInMainMenu == true });
 
     //let subMenuList = [];

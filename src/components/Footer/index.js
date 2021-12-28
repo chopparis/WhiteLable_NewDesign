@@ -31,14 +31,13 @@ const Footer = (props) => {
                     <div className={styles.row}>
                         <div className={styles.text_lable_container}>
                             <div className={styles.footerMenuHolder}>
-                                {footerData && footerData.footerInfo && footerData.footerInfo.FooteMenuItems.map((obj, indx) =>
-                                    <ul key={indx}>
-                                        <li><a>{t(obj.name.replace(/\s/g, "").toLowerCase())}</a></li>
-
-                                    </ul>
-                                )}
-
-
+                                <ul>
+                                    {footerData && footerData.footerInfo && footerData.footerInfo.FooteMenuItems.map((obj, indx) =>
+                                        <li key={indx}>
+                                            <a>{t(obj.name.replace(/\s/g, "").toLowerCase())}</a>
+                                        </li>
+                                    )}
+                                </ul>
                             </div>
 
                         </div>
@@ -123,4 +122,3 @@ const Footer = (props) => {
     );
 }
 export default Footer;
-

@@ -28,10 +28,12 @@
  .gameCards .favHolder .favSelect{
     font-size: 20px !important;
     color: var(--favSelect) !important;
+    cursor: pointer;
   }
   .gameCards .favHolder .favUnSelect{
     font-size: 20px !important;
     color: var(--favUnSelect) !important;
+    cursor: pointer;
   }
   // .gameCards .favHolder .favIconSize{
   //   font-size:20px !important;

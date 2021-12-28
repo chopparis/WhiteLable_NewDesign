@@ -12,6 +12,7 @@
     background-image: linear-gradient(
 180deg
 ,#1c1e27 30%,rgba(28,30,39,.6));
+pointer-events: auto;
 }
 
 
@@ -94,6 +95,7 @@
     height: calc(100% - 51px);
     overflow: hidden;
      overflow-x: auto;
+     pointer-events: auto;
     // overflow-y: scroll;
 }
 

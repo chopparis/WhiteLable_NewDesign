@@ -49,14 +49,18 @@ html {
   --moreGamesTiyle:#099AC1;
   --scrollBgColor:#C6DEE9;
   --scrollerColor:#58BEDC;
-  --footerBG:linear-gradient(90deg, #1172BD 0%, #00C4C6 100%);
+  --footerBG:linear-gradient(90deg, #1172BD 0%, #00C4C6 100%);;
+  --copyRightBg:#0A699D;
   --subMenuTxt:#0E7FBE;
   --sideMenuBg:#089fc2;
   --sideNavDropDownBg:#A8DBFF;
   --textHoverColor:#E92284;
   --themeSwitcher:#121417;
-
-
+  --balanceBg:#089CC1;
+  --myAcctBg:#0980AD;
+  --textColor:#FFFFFF;
+  --footerInfotxtx:#84CEE1;
+  --footerDideLine:#84CEE1;
 
 
 
@@ -68,7 +72,7 @@ html {
   --primaryBGcolor: #212733;
   --secondaryBGcolor: #323746;
 
-  --textColor:#FFFFFF;
+ 
   --secondarytxtColor:#FFFFFF;
   --primarytxtColor:#005BC4;
 
@@ -107,15 +111,18 @@ html {
   --moreGamesTiyle:#099AC1;
   --scrollBgColor:#C6DEE9;
   --scrollerColor:#58BEDC;
-  --footerBG:linear-gradient(90deg, #1172BD 0%, #00C4C6 100%);
+  --footerBG:linear-gradient(90deg, #1172BD 0%, #00C4C6 100%);;
+  --copyRightBg:#0A699D;
   --subMenuTxt:#0E7FBE;
   --sideMenuBg:#089fc2;
   --sideNavDropDownBg:#A8DBFF;
   --textHoverColor:#E92284;
   --themeSwitcher:#121417;
-
-
-
+  --balanceBg:#089CC1;
+  --myAcctBg:#0980AD;
+  --textColor:#FFFFFF;
+  --footerInfotxtx:#84CEE1;
+  --footerDideLine:#84CEE1;
 
 
 --headerTxtColor:#FFFFFF;
@@ -126,7 +133,7 @@ html {
   --primaryBGcolor: #212733;
   --secondaryBGcolor: #323746;
 
-  --textColor:#FFFFFF;
+
   --secondarytxtColor:#FFFFFF;
   --primarytxtColor:#005BC4;
 
@@ -164,11 +171,18 @@ html {
   --scrollBgColor: #003F57;
   --scrollerColor:#FFFFFF;
   --footerBG:#121417;
+  --copyRightBg:#000000;
   --subMenuTxt:#FFFFFF;
   --sideMenuBg:#121417;
   --sideNavDropDownBg:#000000;
   --textHoverColor:#E92284;
   --themeSwitcher:#0E7FBE;
+  --balanceBg:#163A55;
+  --myAcctBg:#10547D;
+  --textColor:#FFFFFF;
+  --footerInfotxtx:#50606A;
+  --footerDideLine:#0F4F76;;
+
 
 
   --headerTxtColor:#2997FF;
@@ -179,7 +193,6 @@ html {
   --primaryBGcolor: #A8DBFF;
   --secondaryBGcolor: #A8DBFF;
 
-  --textColor:#212733;
   --secondarytxtColor:#FFFFFF;
   --primarytxtColor:#E0B0FF;
 

@@ -9,8 +9,8 @@
     "promotionBanners":[
 
         {"promotionType" : "static" , "imgPath": "banner_1.jpg", "launchUrl" : "?a=40" ,"name":"SinupBonus"},
-        {"promotionType" : "static" , "imgPath": "banner_2.jpg", "launchUrl" : "?a=40" ,"name":"SinupBonus"},
-        {"promotionType" : "static" , "imgPath": "banner_3.jpg", "launchUrl" : "?a=40" ,"name":"SinupBonus"}
+        {"promotionType" : "static" , "imgPath": "banner_3.jpg", "launchUrl" : "?a=40" ,"name":"SinupBonus"},
+        {"promotionType" : "static" , "imgPath": "banner_1.jpg", "launchUrl" : "?a=40" ,"name":"SinupBonus"}
     ],
     "showJackpot":true,
     "show_winners":true,

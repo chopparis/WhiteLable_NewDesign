@@ -32,7 +32,7 @@ const GameProviders = (props) => {
     const [leftArrow, setLeftArrow] = useState(true);
     const [rightArrow, setRightArrow] = useState(false);
 
-    
+
 
     useEffect(() => {
         providersList(props.pList);
@@ -78,9 +78,9 @@ const GameProviders = (props) => {
         <div className={styles.gameProviderSection} >
             <div className={styles.Ptitle}>
                 <div><span>{t("providers")}</span></div>
-                {/* <div className={styles.PBtnsHolder}>
-                    <div className={`${leftArrow ? styles.disableNavBtn : styles.enableNavBtn}  ${styles.PnavBtns}`} onClick={onLeftMove}><FontAwesomeIcon icon={faAngleLeft} /></div>
-                    <div className={`${rightArrow ? styles.disableNavBtn : styles.enableNavBtn}  ${styles.PnavBtns}`} onClick={onRightMove}><FontAwesomeIcon icon={faAngleRight} /></div>
+                {/* <div className={styles.pBtnsHolder}>
+                    <div className={`${leftArrow ? styles.disableNavBtn : styles.enableNavBtn}  ${styles.pnavBtns}`} onClick={onLeftMove}><FontAwesomeIcon icon={faAngleLeft} /></div>
+                    <div className={`${rightArrow ? styles.disableNavBtn : styles.enableNavBtn}  ${styles.pnavBtns}`} onClick={onRightMove}><FontAwesomeIcon icon={faAngleRight} /></div>
                 </div> */}
             </div>
 
@@ -108,20 +108,17 @@ const GameProviders = (props) => {
                             }}
                         >
                             <a className={styles.providerImg}
-                                style={{ 
-                                    backgroundImage: `url(${props.domain_cdn + "/images/" + process.env.NEXT_PUBLIC_SITE_CODE + "/gameproviders/"+obj+".svg" + "?v=" + props.versionNum}) `,
+                                style={{
+                                    backgroundImage: `url(${props.domain_cdn + "/images/" + process.env.NEXT_PUBLIC_SITE_CODE + "/gameproviders/" + obj + ".svg" + "?v=" + props.versionNum}) `,
                                     // backgroundImage: `url(${props.domain_cdn + "/images/" + process.env.NEXT_PUBLIC_SITE_CODE + "/gameproviders/"+obj+".svg" + "?v=" + props.versionNum}) , url(${props.domain_cdn + "/images/" + process.env.NEXT_PUBLIC_SITE_CODE + "/payment-icons/Eco.webp" + "?v=" + props.versionNum})`,
-                                    backgroundRepeat:"no-repeat",
+                                    backgroundRepeat: "no-repeat",
                                     backgroundSize: "100%"
-                                 }}
+                                }}
                             ></a>
                         </Link>
 
                     </div>
                 </div>)}
-
-
-
             </div>
         </div>
 

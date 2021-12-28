@@ -68,7 +68,7 @@ border-radius: 47px;
 }
 
 .menuItemName:hover{
-//  background:var(--btnSelectColor);
+ background:var(--btnSelectColor);
 
 }
 .menuItemName span{
@@ -158,9 +158,9 @@ padding: 1rem;
     color: #E92284 !important;
   }
   
-  .menuItem:hover{
+  // .menuItem:hover{
   //  color: var(--primaryColor);
-  }
+  // }
   // .menuItem:focus {
   //   color: var(--primaryTxt);
   // }

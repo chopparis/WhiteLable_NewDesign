@@ -58,7 +58,7 @@
   margin-bottom: 1%;
   // border: 2px solid red;
 }
-.moreGamesHolder .titleHolder h2{
+.moreGamesHolder .titleHolder span{
   @extend .txtProps;
   font-size: 2rem !important;
   margin-bottom: 1rem;
@@ -396,6 +396,7 @@ border-radius: 50px;
   // display: flex;
   // justify-content: center;
   // flex-wrap: wrap;
+  // align-items: center;
   //  border:2px solid red;
 
    width: 100%;
@@ -620,10 +621,17 @@ font-size: 18px;
 
   }
 
-  @media (max-width: 1360px){
+  // @media (max-width: 1360px){
+    @media (max-width: 1500px){
     .gameTileWraper{
-      width: 12.5%;
+      width: 13.5%;
       height: 17.5vw;
+  }
+  .gamesSection{
+    display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
   }
   }
 

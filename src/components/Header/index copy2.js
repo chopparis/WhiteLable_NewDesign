@@ -18,6 +18,7 @@ import { getRegistrationInfo } from '../../../pages/api/userValidations/getRegis
 import Login from '../Login';
 import dynamic from 'next/dynamic';
 import PubSub from 'pubsub-js';
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookies from 'js-cookie';
@@ -32,7 +33,7 @@ const Header = (props) => {
     const router = useRouter();
     const { t, lang } = useTranslation('common');
     const [showLogin, setLoginBtn] = useState(false);
-    const [sessionDetails, setSession] = useState({});
+    // const [sessionDetails, setSession] = useState({});
     const [balance, setBalance] = useState({});
     const [isWindow, setBalWind] = useState(false);
     const [regiInfo, setRegInfo] = useState({});
@@ -43,7 +44,7 @@ const Header = (props) => {
     const ForgotPSW = dynamic(() => import('../ForgotPSW'))
     const ResetPswd = dynamic(() => import('../ResetPswd'));
     const StatusMsg = dynamic(() => import('../StatusMsg'));
-    const RegistrationNew = dynamic(() => import('../RegistrationNew/FormHolder'));
+     const RegistrationNew = dynamic(() => import('../RegistrationNew/FormHolder'));
 
 
     const onLoginSucsses = (msg, data) => {
@@ -71,12 +72,6 @@ const Header = (props) => {
 
     }, []);
 
-    
-
-    useEffect(async () => {
-        upDateBalance();
-    }, [router.query]);
-
 
     useEffect(async () => {
         //  console.log(props.regConfigObj , "______----res")
@@ -99,6 +94,7 @@ const Header = (props) => {
 
 
     const onUserLogin = () => {
+        //console.log("_____________Logn")
         // gtag.event({
         //     action: "openGameWindow",
         //     category: "slots",
@@ -170,7 +166,7 @@ const Header = (props) => {
             return
         }
         if (res.result && res.result.session_id) {
-            setSession(res.result);
+            //   setSession(res.result);
             setLoginBtn(false);
             upDateBalance();
         } else {
@@ -185,21 +181,14 @@ const Header = (props) => {
     const windowClosed = () => {
         setBalWind(false);
     }
-    const getFormatedBalance = (type) => {
+    const getFormatedBalance = () => {
         let currency_code = balance.currency ? balance.currency : "";
         let cash_val = balance.cash ? balance.cash : "0.00";
-        let bonus_val = balance.cash ? balance.bonus : "0.00";
-
-        if (type == "cash") {
-            return (currency_code + " " + cash_val)
-        } else if (type == "bonus") {
-            return (currency_code + " " + bonus_val)
-        }
-
+        return (currency_code + " " + cash_val)
     }
 
     const onOpenSideMenu = () => {
-        // console.log("____>open side menu")
+         console.log("____>open side menu")
         toggleSideMenu(true);
     }
     const sideMenuClosed = () => {
@@ -208,84 +197,48 @@ const Header = (props) => {
 
     return (
         <section className={styles.headerHolder}>
-            <GlobalSearch versionNum={props.appConfigObj.version} />
-            <Login />
-            <ForgotPSW />
-            <ResetPswd />
-            <StatusMsg />
-            <RegistrationNew data={regiInfo} versionNum={props.appConfigObj.version} />
-            {/* <Notifications /> */}
-            <div className={styles.logoHolder} onClick={() => router.push("/")}>
-                <Image
-                    src={"/images/" + process.env.NEXT_PUBLIC_SITE_CODE + "/logo.svg" + "?v=" + props.appConfigObj.version}
-                    quality={100}
-                    layout="fill"
-                    alt="Casino games Logo"
-                />
-
-
-            </div>
-
-
-
-            {showLogin ? <div className={styles.loginSection}>
-                <div className={`${styles.loginBtnsWaraper} ${showLogin ? styles.showLogins : styles.hideLogins}`}>
-                    <div className={`${styles.signupBtn} ${showLogin ? styles.showLogins : styles.hideLogins}`} onClick={onUserSignUp}><span>{'SIGN UP'}</span></div>
-                    <div className={`${styles.loginBtn} ${showLogin ? styles.showLogins : styles.hideLogins}`} onClick={onUserLogin}><span>{'LOGIN'}</span></div>
-                </div>
-
-            </div> :
-
-                <div className={styles.after_loginSection}>
-
-
-
-                    <div className={`${styles.defualtBalDispaly} ${!showLogin ? styles.hideBalance : styles.defualtBalDispaly}`}>
-
-                        <div className={styles.new_myaccount_container}>
-                            <div className={styles.new_myaccount_name}>
-                                <span>{'MY ACCOUNT'}</span>
-                                <span className={styles.new_myaccount_name_value}>{sessionDetails && sessionDetails.first_name}</span>
-                            </div>
-                            <div className={styles.new_myaccount_balance}>
-                                <span>{'BALANCE'}</span>
-                                <span className={styles.new_myaccount_name_value}>{getFormatedBalance('cash')}</span>
-                            </div>
-                            <div className={styles.new_myaccount_balance}>
-                                <span>{'BONUS BALANCE'}</span>
-                                <span className={styles.new_myaccount_name_value}>{getFormatedBalance('bonus')}</span>
-                            </div>
-
-                            <div className={styles.new_myaccount_depositBtn}>
-                                <span>{'DEPOSIT'}</span>
-
-                            </div>
-                            <div onClick={OpenNotificstionPage} className={styles.bellIcon}><Badge ><NotificationsIcon fontSize='inherit' /><Badge color="secondary" badgeContent={17} fontSize='inherit' /></Badge></div>
-
-                        </div>
-
-                    </div>
-
-                </div>}
-
-
-            <div className={styles.navSection}>
-                <div>
-                    <span onClick={onOpenSideMenu} className={styles.toggleMenu}>&#9776;</span>
+             <div>
+                    {/* <span onClick={onOpenSideMenu} className={styles.toggleMenu}>&#9776;</span> */}
                     <NewSideNav isShow={isSideMenu} sideMenuClosed={sideMenuClosed} versionNum={props.appConfigObj.version} />
+                    <GlobalSearch versionNum={props.appConfigObj.version} />
+                    <Login />
+                    <ForgotPSW />
+                    <ResetPswd />
+                    <StatusMsg />
+                    <RegistrationNew data={regiInfo} versionNum={props.appConfigObj.version} />
+                    {/* <Notifications /> */}
+                </div>
+
+            <header>
+                <div className={styles.headerContaner}>
+                    <div className={styles.menu_search}>
+                        <span onClick={onOpenSideMenu} className={styles.toggleMenu}>&#9776;</span>
+                        <span onClick={onOpenSideMenu} className={styles.toggleMenu}><FontAwesomeIcon icon={faSearch}  /></span>
+                    </div>
+                    <div className={styles.Header_logo}>
+                        <Image
+                            src={"/images/" + process.env.NEXT_PUBLIC_SITE_CODE + "/logo.svg"}
+                            quality={100}
+                            alt="Casino games Logo"
+                            layout="fill"
+                        />
+                    </div>
+                    <div className={styles.sgnup_login_container}>
+                        <button className={styles.signup} onClick={onUserSignUp}>SIGN UP</button>
+                        <button className={styles.login} onClick={onUserLogin}>LOGIN</button>
+                    </div>
+                    {/* <div className={styles.btn_container}>
+                        <div className={styles.item}>  <span className={styles.lable}>MY ACCOUNT</span> <span className={styles.value_name}>JOHNSMITH</span></div>
+                        <div className={styles.item}>  <span className={styles.lable}>BALANCE: </span> <span className={styles.value}>$0.00</span></div>
+                        <div className={styles.item_bonus}>  <span className={styles.lable}>BONUS BALANCE:</span> <span className={styles.value}>$0.00</span></div>
+                        <button className={styles.deposit}>DEPOSIT</button>
+                        <div className={styles.notifications}>
+                            <span><FontAwesomeIcon icon={faBell}  /> <span className={styles.count}>86</span></span>
+                        </div>
+                    </div> */}
 
                 </div>
-                <div onClick={onOpenGlobalSearch} className={styles.searchHolder}><SearchSharpIcon fontSize="inherit" /></div>
-
-
-            </div>
-
-            <div className={styles.mLoginWraper}>
-                {showLogin ? <div className={styles.mSignUpBtn} onClick={onUserSignUp}><span>{t("joinnow")}</span></div> : ""}
-                {showLogin ? <div className={styles.mLoginBtn} onClick={onUserLogin}><span>{t("login")}</span></div> : ""}
-
-            </div> 
-
+            </header>
         </section>
     );
 }

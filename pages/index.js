@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import request from "../utils/request";
-import { formateMenuItems } from "../utils/utility";
+import { formateMenuItems , formateCMSMenuList} from "../utils/utility";
 import Head from 'next/head';
 import { connect } from "react-redux";
 import { useRouter } from 'next/router';
 import { getMenuList, getAppInfo } from './api/getAppInfo';
 // import { cmsHomeTest } from './api/cms/getCMSdetails';
-import { updateAppConfig, upDateRegInfo , updateMenuList, updateDeviceType, updateGameSections, updateProvidersList } from '../redux/actions/config';
+import { updateAppConfig, upDateRegInfo , updateMenuList, updateDeviceType, updateGameSections, updateProvidersList , updateCMSPlainMenuList } from '../redux/actions/config';
 import MainContainer from '../src/components/MainContainer/';
 import CarouselWidget from '../src/components/CarouselWidget/';
 import CasinoGameContainer from '../src/components/CasinoGameContainer/';
@@ -77,9 +77,9 @@ const Home = (result) => {
       }else{
        // console.log(gamesCateg.status , "_____CMS" , gamesCateg.statusText)
       }
-    }
+    //}
 
-    if (result.menuList.length == 0) {
+   // if (result.menuList.length == 0) {
 
       let dynamicMenuObj = {};
       try {
@@ -91,17 +91,19 @@ const Home = (result) => {
       let finalMenuList = formateMenuItems(dynamicMenuObj, staticMenuList);
       dispatch(updateMenuList(finalMenuList))
 
+      let CMSPalinMenuList = formateCMSMenuList(dynamicMenuObj, gamesCateg.gameSections);
+      dispatch(updateCMSPlainMenuList(CMSPalinMenuList));
       // console.log(finalMenuList , "________--plainCMSList")
+    //}
+
     }
-
-
     if (result.providersList.length == 0) {
       const providersList = await request(`./api/getProviders`, { params: {} });
      
       if (providersList.result) {
         dispatch(updateProvidersList(providersList.result));
       } else {
-        console.log(providersList.status , "__From providers___" , providersList.statusText)
+      //  console.log(providersList.status , "__From providers___" , providersList.statusText)
         dispatch(updateProvidersList([]));
       }
     }
