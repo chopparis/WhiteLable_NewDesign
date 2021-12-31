@@ -98,7 +98,8 @@ html {
 /* if we use 'dark' , 'light' it apply for window as well ( browser scrolings) */
 
 [data-theme='blue'] {
-  --appBg:#FFFFFF;
+  /* --appBg:#FFFFFF; */
+  --appBg:#1B1F27;
   --headerBGColor:linear-gradient(90deg, #1172BD 0%, #00C4C6 100%);
   --menuBtncolor:#0E7FBE;
   --secondBgColor:#D2ECF9;

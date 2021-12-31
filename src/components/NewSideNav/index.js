@@ -19,6 +19,11 @@ const NewSideNav = (props) => {
     const router = useRouter();
     const { theme, setTheme } = useTheme();
     const menuList = useSelector(state => state.StaticDataReducer.menuList);
+
+    const PlayerStatus = useSelector(state => state.StaticDataReducer.playerInfo);
+    const isUserActive = useSelector(state => state.StaticDataReducer.isPlayerActive); 
+
+
     const [isOpen, setWindowMode] = useState(false);
 
     // const listControler = [...menuList]
@@ -51,10 +56,11 @@ const NewSideNav = (props) => {
         for (const key in menuItems) {
 
             let n = menuItems[key].name ? menuItems[key].name : "";
-            if (menuItems[key].id == "m2") {
+            if (menuItems[key].id == "m2" || menuItems[key].id == "m3") {
              //   console.log(Cookies.get('tocken') , "_____________>>Cookies.get('tocken')")
                 if( Cookies.get('tocken') == '' || Cookies.get('tocken') == undefined){
-                    menuItems.splice(menuItems.findIndex(obj => obj.id == "m2"), 1)
+                    menuItems.splice(menuItems.findIndex(obj => obj.id == "m2"), 1);
+                    menuItems.splice(menuItems.findIndex(obj => obj.id == "m3"), 1);
                 }else{
                   //  menuItems.splice(menuItems.findIndex(obj => obj.id == "m2"), 1)
                 }
@@ -87,23 +93,11 @@ const NewSideNav = (props) => {
     }, [router]);
 
 
-    const validateSession = async() =>{
-        const isValidSession = await request(`/api/player/validateSession`, {});
-        if(isValidSession && isValidSession.result && isValidSession.result.is_valid){
-            return true;
-        }else{
-            //console.log(isValidSession , "____Side_---isValidSession" , isValidSession.status)
-            return false;
-        }
- 
-    }
-
     useEffect(async() => {
-        let isUserActive = await validateSession();
         if (isUserActive) {
             setLoginStatus(true);
         }
-    }, []);
+    }, [isUserActive]);
 
     useEffect(() => {
 
@@ -112,8 +106,17 @@ const NewSideNav = (props) => {
     }, [props.isShow]);
 
 
+    useEffect(() => {
+        if(PlayerStatus && PlayerStatus.playerLogin){
+            setLoginStatus(true)
+        }else{
+            setLoginStatus(false)
+        }
+        let finalList = resetAllItems(menuList);
+        setMenuList(finalList);
 
-
+    }, [PlayerStatus]);
+    
 
     const onExpanding = selectedItem => () => {
         //  let temList = resetAllItems(finalMenuList);
@@ -159,21 +162,19 @@ const NewSideNav = (props) => {
         props.sideMenuClosed();
 
     }
-    const onLoginSucsses = () => {
-        setLoginStatus(true)
-        //  setMenuList(menuList)
-        let finalList = resetAllItems(menuList);
-        setMenuList(finalList);
-    }
-    const onLogOutSuccses = () => {
-        setLoginStatus(false)
-        //resetMenu();
-        let finalList = resetAllItems(menuList);
-        setMenuList(finalList);
-    }
+    //const onLoginSucsses = () => {
+        // setLoginStatus(true)
+        // let finalList = resetAllItems(menuList);
+        // setMenuList(finalList);
+   // }
+    //const onLogOutSuccses = () => {
+        // setLoginStatus(false)
+        // let finalList = resetAllItems(menuList);
+        // setMenuList(finalList);
+   // }
 
-    PubSub.subscribe('OpenLoginSucsses', onLoginSucsses);
-    PubSub.subscribe('LogOutSuccsess', onLogOutSuccses)
+    // PubSub.subscribe('OpenLoginSucsses', onLoginSucsses);
+    // PubSub.subscribe('LogOutSuccsess', onLogOutSuccses)
 
 
     PubSub.subscribe("clickedOutSide", onOutSideNavBarClicked);

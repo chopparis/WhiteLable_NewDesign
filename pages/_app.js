@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
 import WL_MetaData from "../src/components/WL_MetaData";
 import PropTypes from 'prop-types';
- import Head from 'next/head';
+import Head from 'next/head';
 // import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // import theme from '../theme';
@@ -12,6 +12,7 @@ import Layout from '../src/components/Layout/'
 import { wrapper } from "../redux/store";
 import { ThemeProvider } from 'next-themes'
 import PubSub from 'pubsub-js';
+import CookieConsent, { Cookies } from "react-cookie-consent";
 
 // import the library
 // import { library } from '@fortawesome/fontawesome-svg-core';
@@ -24,21 +25,21 @@ import PubSub from 'pubsub-js';
 // get our fontawesome imports
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
- 
+
 
 // import gStyles from '../styles/globals.scss'
 // import SubscriptionUtility from "../utils/utility";
 // export default function MyApp(props) {
 
-  // export function reportWebVitals(metric) {
-  //   if (metric.label === 'web-vital') {
-  //     console.log(metric , "<---export matrucs") // The metric object ({ id, name, startTime, value, label }) is logged to the console
-  //   }
-  // }
+// export function reportWebVitals(metric) {
+//   if (metric.label === 'web-vital') {
+//     console.log(metric , "<---export matrucs") // The metric object ({ id, name, startTime, value, label }) is logged to the console
+//   }
+// }
 
 const MyApp = (props) => {
 
-  
+
   const { Component, pageProps } = props;
 
   // console.log(pageProps , "_______---pagePropspageProps")
@@ -95,10 +96,48 @@ const MyApp = (props) => {
         <CssBaseline />
         {/* <SubscriptionUtility /> */}
         <Layout>
-       
+
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>
+
+      <CookieConsent
+        enableDeclineButton
+        declineButtonText="Decline"
+        onDecline={() => {
+          alert("are sure you want decline");
+        }}
+
+        location="bottom"
+        buttonText="Ok Thanks"
+        cookieName="allowCookies"
+        style={{ background: '#0a94c1'}}
+        buttonStyle={{
+          width:"auto",
+          height:"auto",
+          padding:"14px",
+          borderRadius:"23px",
+          background:"#E92284",
+          color: "white",
+          fontWeight: "normal",
+          fontSize:"14px",
+        }}
+        declineButtonStyle={{
+          background: "#0a699d",
+          border: "0",
+          borderRadius: "0px",
+          boxShadow: "none",
+          color: "#e5e5e5",
+          cursor: "pointer",
+          flex: "0 0 auto",
+          padding: "5px 10px",
+          margin: "15px",
+        }}
+        expires={365}
+      >
+        We use cookies to give you the best online experience. By using our website you agree to our use of cookies in accordance with our {" "}
+        <span style={{ fontSize: "16px", color: "#000000", fontWeight: "normal", textDecoration: "underline", cursor: "pointer" }}>Privacy Policy</span>
+      </CookieConsent>
     </React.Fragment>
   );
 }

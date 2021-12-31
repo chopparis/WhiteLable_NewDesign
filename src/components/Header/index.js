@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { connect, useDispatch } from "react-redux"
 import * as gtag from '../../../lib/gtag';
 import Image from 'next/image';
+import { updatePlayerDetails , updateUserSession } from '../../../redux/actions/config';
 import SearchSharpIcon from '@material-ui/icons/SearchSharp';
 import NewSideNav from '../NewSideNav';
 import GlobalSearch from '../GlobalSearch';
@@ -30,8 +31,12 @@ import Cookies from 'js-cookie';
 
 const Header = (props) => {
     const router = useRouter();
+    const dispatch = useDispatch();
+
     const { t, lang } = useTranslation('common');
     const [showLogin, setLoginBtn] = useState(false);
+    const [showPlayerInfo, setPlayerInfo] = useState(false);
+
     const [sessionDetails, setSession] = useState({});
     const [balance, setBalance] = useState({});
     const [isWindow, setBalWind] = useState(false);
@@ -46,29 +51,33 @@ const Header = (props) => {
     const RegistrationNew = dynamic(() => import('../RegistrationNew/FormHolder'));
 
 
-    const onLoginSucsses = (msg, data) => {
-        setLoginBtn(false);
-        upDateBalance();
-    }
+    // const onLoginSucsses = (msg, data) => {
+    //     setLoginBtn(false);
+    //     upDateBalance();
+    // }
+
+    
+    useEffect(()=>{
+        if(props.playerInfo && props.playerInfo.playerLogin){
+            setLoginBtn(false);
+            setPlayerInfo(true);
+            upDateBalance();
+        }
+
+    },[props.playerInfo])
 
     const onLogOut = () => {
         onUserLogout();
     }
 
     useEffect(async () => {
-        PubSub.subscribe('OpenLoginSucsses', onLoginSucsses);
+        // PubSub.subscribe('OpenLoginSucsses', onLoginSucsses);
         PubSub.subscribe('SideMEnuLogOut', onLogOut);
-        await getSessionDetails();
-        // const res = await getRegistrationInfo();
-
-        //const resNew = await request(`../../../api/userValidations/getRegistrationInfo`, {});
-        // console.log(resNew , "______----resNew");
-        //  console.log(regConfigObj , "______----res")
-
-        //   setRegInfo(regConfigObj);
-
-        // console.log(props.appConfigObj.version , "______version")
-
+        let isPlayerActive = await validateSession();
+        dispatch(updateUserSession(isPlayerActive));
+        if(isPlayerActive){
+            await getSessionDetails();
+        }
     }, []);
 
     
@@ -129,13 +138,16 @@ const Header = (props) => {
         if (res.error != undefined && res.error.code == 5005) {
             //setValidLogin(false)
             //   dispatch(updateUserLogin(false));
+            // dispatch(updatePlayerDetails({playerInfo : {} , playerLogin:false}));
         } else {
             //Logout secussesfull
             Cookies.set('tocken', '');
             // localStorage && localStorage.setItem("tocken", "");
+            dispatch(updatePlayerDetails({playerInfo : {} , playerLogin:false}));
             PubSub.publish("LogOutSuccsess", "")
             // dispatch(updateUserLogin(false));
-            setLoginBtn(true)
+            setLoginBtn(true);
+            setPlayerInfo(false);
         }
     }
 
@@ -146,18 +158,31 @@ const Header = (props) => {
         // let s_id = Cookies.get('tocken');
         //   let obj = { params: { "session_id": localStorage && localStorage.tocken } }
         //let obj = { params: { "session_id": s_id } }
-        const res = await request(`../../../api/balance/Binfo`, {})
-        // console.log(res , "_____BBBB___-res.statusres.statusres.status")
-        // console.log(resCMD , "__resCMD______-res.statusres.statusres.status")
-
-        if (res.error) { return }
-        if (res && res.result) {
-            // show Balance
-            setBalance(res.result)
-        } else {
-            // error
-            return
+        let isPlayerActive = await validateSession();
+        if(isPlayerActive){
+            dispatch(updateUserSession(isPlayerActive));
+            const res = await request(`../../../api/balance/Binfo`, {})
+            if (res.error) { return }
+            if (res && res.result) {
+                // show Balance
+                setBalance(res.result)
+            } else {
+                // error
+                return
+            }
         }
+        
+    }
+
+    const validateSession = async() =>{
+        const isValidSession = await request(`/api/player/validateSession`, {});
+        if(isValidSession && isValidSession.result && isValidSession.result.is_valid){
+            return true;
+        }else{
+            //console.log(isValidSession , "____Side_---isValidSession" , isValidSession.status)
+            return false;
+        }
+ 
     }
 
     const getSessionDetails = async () => {
@@ -165,16 +190,20 @@ const Header = (props) => {
         const res = await request(`../../../api/session/details`, {});
         if (res.error) {
             setLoginBtn(true);
+            setPlayerInfo(false);
             Cookies.set('tocken', '');
             // localStorage && localStorage.setItem("tocken", "");
+            dispatch(updatePlayerDetails({playerInfo : {} , playerLogin:false}));
             return
         }
         if (res.result && res.result.session_id) {
             setSession(res.result);
             setLoginBtn(false);
+            setPlayerInfo(true);
             upDateBalance();
         } else {
             setLoginBtn(true);
+            setPlayerInfo(false);
         }
     }
 
@@ -229,18 +258,17 @@ const Header = (props) => {
 
 
             {showLogin ? <div className={styles.loginSection}>
-                <div className={`${styles.loginBtnsWaraper} ${showLogin ? styles.showLogins : styles.hideLogins}`}>
-                    <div className={`${styles.signupBtn} ${showLogin ? styles.showLogins : styles.hideLogins}`} onClick={onUserSignUp}><span>{'SIGN UP'}</span></div>
-                    <div className={`${styles.loginBtn} ${showLogin ? styles.showLogins : styles.hideLogins}`} onClick={onUserLogin}><span>{'LOGIN'}</span></div>
+                <div className={styles.loginBtnsWaraper} >
+                    <div className={styles.signupBtn}  onClick={onUserSignUp}><span>{'SIGN UP'}</span></div>
+                    <div className={styles.loginBtn} onClick={onUserLogin}><span>{'LOGIN'}</span></div>
                 </div>
 
-            </div> :
+            </div> : "" }
 
-                <div className={styles.after_loginSection}>
+            {showPlayerInfo ? <div className={styles.after_loginSection}>
 
-
-
-                    <div className={`${styles.defualtBalDispaly} ${!showLogin ? styles.hideBalance : styles.defualtBalDispaly}`}>
+                    {/* <div className={`${styles.defualtBalDispaly} ${!showLogin ? styles.hideBalance : styles.defualtBalDispaly}`}> */}
+                    <div className={styles.defualtBalDispaly} >
 
                         <div className={styles.new_myaccount_container}>
                             <div className={styles.new_myaccount_name}>
@@ -266,7 +294,7 @@ const Header = (props) => {
 
                     </div>
 
-                </div>}
+                </div> : ""}
 
 
             <div className={styles.navSection}>
@@ -294,8 +322,8 @@ const mapStateToProps = (state) => {
     return {
         // menuObj: state.StaticDataReducer.menuObj,
         appConfigObj: state.StaticDataReducer.appConfigObj,
-        regConfigObj: state.StaticDataReducer.regConfigObj
-        // playerInfo: state.StaticDataReducer.playerInfo
+        regConfigObj: state.StaticDataReducer.regConfigObj,
+        playerInfo: state.StaticDataReducer.playerInfo
     };
 };
 

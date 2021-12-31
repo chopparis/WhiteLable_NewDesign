@@ -7,7 +7,22 @@ import { connect, connectAdvanced } from "react-redux";
 import MenuContainer from "../MenuContainer/";
 import WLGamesSection from "../WLGamesSection/";
 
+// import dynamic from 'next/dynamic'
+// import { lazy, Suspense } from 'react'
 
+// import Content from '../components/content'
+
+{/* <div>
+      <Suspense fallback={<Spinner />}>
+        <Content />
+      </Suspense>
+      <Suspense fallback={<Spinner />}>
+        <Profile />
+      </Suspense>
+      <Suspense fallback={<Spinner />}>
+        <Footer />
+      </Suspense>
+    </div> */}
 const CasinoGameContainer = (props) => {
 
   return (

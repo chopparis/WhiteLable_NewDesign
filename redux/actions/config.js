@@ -64,11 +64,11 @@ export const updateDeviceType = (deviceTypeObj) => async (dispatch) => {
 
 
 
-export const updateUserLogin=(isUserLogin)=>async(dispatch)=>{
-    // dispatch({
-    //     type: UPDATE_USER_LOGIN,
-    //     data: isUserLogin,
-    // });
+export const updateUserSession=(isUserLogin)=>async(dispatch)=>{
+    dispatch({
+        type: UPDATE_USER_LOGIN,
+        data: isUserLogin,
+    });
 
 }
 
@@ -159,3 +159,4 @@ export const launchGameWindow =(str) =>async (dispatch) =>{
         data: str,
     });
 }
+

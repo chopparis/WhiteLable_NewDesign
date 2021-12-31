@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../style.module.scss';
 import { faMoneyCheckAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import request from "../../../../utils/request";
 
 const BetHistory = () => {
 
@@ -34,6 +35,17 @@ const BetHistory = () => {
   }
 
   ]);
+
+  useEffect(async()=>{
+
+    let obj = {
+      params: {"start_date": "2021-04-01","end_date": "2021-12-01"}
+  }
+
+    const res = await request(`/api/games/getBetHistory`, obj );
+    console.log(res , "________--resres bonus");
+},[]);
+
 
   return (
 

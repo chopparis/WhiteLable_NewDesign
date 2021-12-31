@@ -148,8 +148,12 @@ const MoreGamesContainer = (props) => {
         if (menuObj && menuObj.display_name) {
             setGameTitle(menuObj.display_name);
         }
+       // console.log(moreGamesChunk , "_______--moreGamesChunk")
+        // if(Object.keys(moreGamesChunk).length == 0){
+        //     clearAllFilter();
+        // }
+       // setMoreGamesChunk({});
         clearAllFilter();
-    
         // }, [router.query ]);
     }, [router.query , props.cmsPlainMenu]);
 

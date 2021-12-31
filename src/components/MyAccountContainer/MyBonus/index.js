@@ -4,6 +4,7 @@ import styles from '../style.module.scss';
 import { faMedal } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from 'next/image';
+import request from "../../../../utils/request";
 
 const MyBonus = () => {
 
@@ -35,8 +36,19 @@ const MyBonus = () => {
     }
     ]);
 
+    useEffect(async()=>{
 
+        const res = await request(`/api/wallet/getBonuses`, {});
+        //console.log(res , "________--resres bonus");
+    },[]);
 
+    const onForFitBonus = bonus_balance_id => async() => {
+        let obj = {
+            params: {bonus_balance_id:bonus_balance_id}
+        }
+        const res = await request(`/api/wallet/forfitBonus`, obj);
+      //  console.log(res , "________--forft bonus");
+    }
     const onPanelExpand = event => {
 
         console.log(event.current, event.currentTarget)
@@ -121,7 +133,7 @@ const MyBonus = () => {
                                             <label className={`${styles.input_label} ${styles.text_align_right} ${styles.form_group_60}  `} > {bonusObj.expiry_date}</label>
                                         </li>
                                     </ul>
-                                    <button type="button" className={styles.forfeit_button}>
+                                    <button type="button" className={styles.forfeit_button} onClick={onForFitBonus(bonusObj.bonus_balance_id)}>
                                         <span>Forfeit</span>
                                     </button>
                                 </div></div>

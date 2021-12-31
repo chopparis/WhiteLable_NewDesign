@@ -80,8 +80,8 @@
   .new_myaccount_container .new_myaccount_depositBtn{
     width: auto;
     height: auto;
-    padding-left: 44px;
-    padding-right: 45px;
+    padding-left: 30px;
+    padding-right: 30px;
     border-radius: 24px;
     display: flex;
     justify-content:center;
@@ -383,6 +383,10 @@
   margin-right: 6%;
   right: 0px;
   position: absolute;
+  // visibility: hidden;
+}
+.loginSection_show{
+  visibility:visible;
 }
 .after_loginSection{
     display: flex;
@@ -393,8 +397,11 @@
     margin-right: 12%;
     right: 0px;
     position: absolute;
+    //visibility: hidden;
 }
-
+.after_loginSection_show{
+  visibility: visible;
+}
 .showLogins{
     display: flex;
 }
@@ -402,7 +409,7 @@
     display: none;
 }
 .defualtBalDispaly{
-    display: none;
+   // display: none;
     width: 100%;
 }
 .hideBalance{

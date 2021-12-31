@@ -15,7 +15,10 @@
     left: 0;
     background:var(--sideMenuBg);
     overflow-x: hidden;
-    transition: 0.5s;
+    // transition: 0.5s;
+    transition: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
     padding-top: 60px;
   }
   .sideNavWraper{

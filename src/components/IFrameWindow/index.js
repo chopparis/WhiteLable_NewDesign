@@ -200,12 +200,15 @@ const IFrameWindow = (props) => {
             </div> : ""}
             <div className={`${styles.IframeplayWindow} ${screenMode ? styles.setScreenMode : styles.unSetScreenMode}`} >
 
-
+            {/* <form  target="game_WL_iframe"  method="POST" action="do_stuff.asp">
+            <input type="hidden" value="someval" />
+            game_WL_iframe.submit();
+</form> */}
 
                 <div className={styles.gameBody} >
                     {/* <h2>{"gameData.name"}</h2>  */}
 
-                    <iframe onLoad={() => { triggerAppData({}); }} className={styles.game_area} ref={systemHealthFrame} src={gameURL} title="Casino Games" sandbox="allow-same-origin allow-scripts allow-forms allow-storage-access-by-user-activation" scrolling="no" ></iframe>
+                    <iframe name={"game_WL_iframe"} onLoad={() => { triggerAppData({}); }} className={styles.game_area} ref={systemHealthFrame} src={gameURL} title="Casino Games" sandbox="allow-same-origin allow-scripts allow-forms allow-storage-access-by-user-activation" scrolling="no" ></iframe>
                 </div>
 
 

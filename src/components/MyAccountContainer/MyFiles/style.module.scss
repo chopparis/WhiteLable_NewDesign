@@ -54,10 +54,11 @@
   /* width: auto;
   float: left; */
   margin: 35px 0 20px 0;
+  font-size: 32px;
 }
 
 .page_container .form_contanier {
-  background: #212733;
+  // background: #212733;
   padding: 0 30px 15px 30px;
   /* margin_top: 30px; */
   display: inline-block;
@@ -142,6 +143,9 @@
 .page_container .file_dummy .success {
   display: inline-block;
 }
+.page_container .file_dummy  .success a{
+  color:#2997ff;
+}
 .page_container .file_dummy .default {
   display: none;
 }
@@ -168,7 +172,7 @@
   /* height: 58px; */
   padding: 10px 0;
   box-sizing: border-box;
-  width: 86.5%;
+  width: 95%;
   float: left;
 }
 .page_container .edit,
@@ -191,6 +195,9 @@
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .page_container .my_uploadIcon_top{
   font-size: 50px;
@@ -216,7 +223,7 @@
   border: none;
 }
 .page_container button {
-  width: 49.6%;
+  width: 49.5%;
   float: left;
 }
 .page_container .add_button {
@@ -240,13 +247,28 @@
 .page_container .file_upload_progress .progress_bar_status {
   padding-left: 15px;
 }
+.page_container .file_heading{
+  padding: 0 20px;
+}
+.page_container .sub_header{
+  font-size: 1.4rem;
+}
+.page_container .form_contanier .myFiles_vagas_logo{
+  width: 40%;
+}
+@media only screen and (max-width: 1024px) {
+  .page_container .save_button ,
+  .page_container .add_button {
+    width: 49.4%;
+  }
+ }
 @media only screen and (max-width: 768px) {
   .App .container {
     width: 94%;
   }
   .page_container button {
-    width: 49.2%;
-  }
+    width: 49% !important;
+  } 
 }
 
 @media only screen and (max-width: 767px) {
@@ -261,6 +283,7 @@
   }
   .page_container .form_contanier button {
     padding: 0 15px;
+    font-size: 15px;
   }
   .page_container .form_contanier {
     background: unset;
@@ -280,15 +303,20 @@
   .page_container .my_ac_lable {
     display: none;
   }
-  .page_container .heading {
+  .page_container .heading h2.main_heading ,
+  .page_container .main_heading ,
+    .page_container .heading {
     color: #2997ff;
-    font-size: 16px;
+    font-size: 1.3rem !important;
   }
   .page_container .sub_header {
     color: #fff;
+    line-height: 25px;
+    font-size: 14px;
+    margin-bottom: 0;
   }
   .page_container .heading h2.main_heading {
-    margin: 3px 0 40px 0;
+    margin: 3px 0 10px 0;
   }
   .page_container .form_contanier .form_group .form_control::placeholder {
     font-size: 13px;
@@ -303,4 +331,17 @@
     display: inline-block;
     padding-top: 10px;
   }
-}
+  .myFile_container{
+    width: 75%;
+    padding:15px;
+  }
+  .page_container .my_uploadIcon_top{
+    float: left;
+    width: 25px;
+    height: 30px;
+    font-size: 27px;
+  }
+  .page_container .form_contanier .myFiles_vagas_logo{
+    width: 60%;
+  }  
+} 

@@ -6,7 +6,19 @@
   font-family: 'OpenSans-Regular';
   color: var(--textColor);
 }
-
+.psw_input_wraper{
+width: 100%;
+height: auto;
+position: relative;
+}
+.psw_input_wraper .psw_eyeIcon{
+  position: absolute;
+  color: rgb(255, 255, 255);
+  top: 8px;
+  font-size: 20px;
+  right: 11px;
+  cursor: pointer;
+}
 // .unSetOverlay{
 //     display: none;
 //   }
@@ -199,3 +211,9 @@
      background-color: orange !important;
   }
  
+  @media (max-width: 480px){
+    .psw_input_wraper .psw_eyeIcon{
+      top: 6px;
+      font-size: 16px;
+    }
+  }

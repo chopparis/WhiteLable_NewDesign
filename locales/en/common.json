@@ -1,6 +1,6 @@
 {
   "rememberme": "Remember Me",
-  "for_got_psw": "For got password ?",
+  "for_got_psw": "Forgot password ?",
   "user_name": "User name",
   "email": "Email",
   "pass_word": "Password",
@@ -10,7 +10,7 @@
   "enter_password": "Enter password",
   "password": "Password",
   "invalid_login": "Invalid login details",
-  "create_account": "Create Account",
+  "create_account": "CREATE ACCOUNT",
   "signup": "Sign Up",
   "username_required": "User name field is required",
   "username_length_errror": "User name needs to be 6 to 15 characters",

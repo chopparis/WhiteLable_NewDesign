@@ -15,7 +15,7 @@
       {
          "name": "favourites",
          "display_name": "Favourites",
-         "id":99,
+         "id":"m3",
          "permalink":"favourites",
          "iconPath": "menuicons/home.svg",
          "pageId": "favourites",

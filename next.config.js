@@ -20,6 +20,7 @@ const path = require('path')
 module.exports = {
   optimizeFonts: true,
   reactStrictMode: true,
+  // compress: false,
   i18n: {
     locales: ['en', 'fr', 'nl-NL'],
     defaultLocale: 'en',

@@ -13,6 +13,9 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import _ from "lodash";
 import useTranslation from 'next-translate/useTranslation';
 import Cookies from 'js-cookie';
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
     BrowserView,
@@ -26,6 +29,7 @@ export default function LoginForm(props) {
     const router = useRouter();
     const [isValidlogin, setValidLogin] = useState(false);
     const [isFormDisable, setFormMode] = useState(false);
+    const [isShoePsw,isShowPassWord] = useState(false);
     const [isOPen, setOverlay] = useState(false);
     const [responsiveWidth, setResponsiveWidth] = useState("sm");
 
@@ -38,7 +42,7 @@ export default function LoginForm(props) {
 
 
 
-         PubSub.subscribe('OpenLoginWndow', onLogin);
+        PubSub.subscribe('OpenLoginWndow', onLogin);
         // PubSub.subscribe("clickedOutSide", onOutSideClicked);
 
         if (isMobile) {
@@ -49,7 +53,7 @@ export default function LoginForm(props) {
 
         return () => {
             PubSub.unsubscribe('OpenLoginWndow');
-          //  PubSub.unsubscribe("clickedOutSide");
+            //  PubSub.unsubscribe("clickedOutSide");
         };
 
     }, []);
@@ -57,8 +61,8 @@ export default function LoginForm(props) {
     useEffect(() => {
         let defualtOpenWindow = router.query.id ? router.query.id : "";
         //console.log(defualtOpenWindow , "_-<<<<<<<<<<<<defualtOpenWindow")
-       // http://localhost:3000/?id=signup
-        if( defualtOpenWindow == "login"){
+        // http://localhost:3000/?id=signup
+        if (defualtOpenWindow == "login") {
             onLogin();
         }
 
@@ -82,7 +86,7 @@ export default function LoginForm(props) {
             } else {
                 formik.values.rememberMe = false;
             }
-        }else{
+        } else {
             formik.values.userName = "";
             formik.values.passWord = "";
         }
@@ -97,13 +101,13 @@ export default function LoginForm(props) {
     //         resetWindow();
     //     }
     // }
-const closeWindow =(e) => {
-    // console.log(e.target.id,"<<clicked..ifr.!!" ,e.currentTarget.id, "<<<<<<<<<<<")
-    if(e.target.id == "loginWraper-avoid"){
-        resetWindow();
+    const closeWindow = (e) => {
+        // console.log(e.target.id,"<<clicked..ifr.!!" ,e.currentTarget.id, "<<<<<<<<<<<")
+        if (e.target.id == "loginWraper-avoid") {
+            resetWindow();
+        }
+        //
     }
- //
-}
 
     const onJoinNow = () => {
         PubSub.publish('OpenSignUpWndow', "");
@@ -162,7 +166,7 @@ const closeWindow =(e) => {
                         username: values.userName,
                         password: values.passWord,
                         site_code: process.env.NEXT_PUBLIC_SITE_CODE,
-                        api_key :   process.env.NEXT_PUBLIC_API_KEY,
+                        api_key: process.env.NEXT_PUBLIC_API_KEY,
                     }
                 }
                 //  const res = await request(`/api/sendLogin?_u=` + values.userName + "&_p=" + values.passWord , obj)
@@ -187,12 +191,12 @@ const closeWindow =(e) => {
 
 
                 } else if (res.result) {
-                    dispatch(updatePlayerDetails(res.result))
+                    dispatch(updatePlayerDetails({playerloginData : res.result , playerLogin:true}));
                     if (localStorage) {
                         //   console.log(values.rememberMe, "____VV");
-                        Cookies.set('tocken', res.result.session_id , { expires: 365 });
+                        Cookies.set('tocken', res.result.session_id, { expires: 365 });
                         // localStorage.setItem("tocken", res.result.session_id);
-                       
+
                         if (values.checkbox) {
                             localStorage.setItem("userName", values.userName);
                             localStorage.setItem("passWord", values.passWord);
@@ -203,7 +207,7 @@ const closeWindow =(e) => {
                             localStorage.setItem("rememberMe", false);
                         }
                     }
-                    PubSub.publish('OpenLoginSucsses', "");
+                   // PubSub.publish('OpenLoginSucsses', "");
                     //setOverlay(false);
                     resetWindow();
                 }
@@ -237,7 +241,9 @@ const closeWindow =(e) => {
         resetWindow();
     }
 
-
+const togglePassWord =()=>{
+    isShowPassWord(!isShoePsw);
+}
     const resetWindow = () => {
         setOverlay(false);
         setFormMode(false)
@@ -289,15 +295,15 @@ const closeWindow =(e) => {
                         <br />
 
 
-                        <input
-                            type="password"
+                       <div className={styles.psw_input_wraper}> <input
+                            type= { isShoePsw ? "text" : "password" }
                             name="passWord"
                             placeholder={t('enter_password')}
                             className={formik.errors.passWord ? "errorText" : null}
                             onChange={formik.handleChange}
                             value={formik.values.passWord ? formik.values.passWord : ""}
                         />
-
+                        <span className={styles.psw_eyeIcon} onClick={togglePassWord}><FontAwesomeIcon icon={isShoePsw ? faEye : faEyeSlash} /></span></div>
                         {formik.errors.passWord ? (
                             <span className={styles.errorText}>{formik.errors.passWord}</span>
                         ) : null}

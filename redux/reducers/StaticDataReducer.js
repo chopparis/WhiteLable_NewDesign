@@ -6,6 +6,7 @@ import {
   UPDATE_REG_CONFIG,
   UPDATE_APP_LABLES_CONFIG,
   PLAYER_INFO,
+  UPDATE_USER_LOGIN,
   UPDATE_GAME_LIST,
   UPDATE_MENU_LIST,
   UPDATE_PROVIDERS_LIST,
@@ -35,7 +36,8 @@ const staticData = {
   deviceTypeObj : {},
   playerInfo:{},
   gamesSections:[],
-  cacheObj : {}
+  cacheObj : {},
+  isPlayerActive:false
 };
 
 const StaticDataReducer = (state = staticData, action) => {
@@ -101,7 +103,10 @@ const StaticDataReducer = (state = staticData, action) => {
       return Object.assign({}, state, {
         playerInfo : action.data
       });
-
+      case UPDATE_USER_LOGIN:
+        return Object.assign({}, state, {
+          isPlayerActive : action.data
+        });
       case GAME_SECTIONS:
       return Object.assign({}, state, {
         gamesSections : action.data

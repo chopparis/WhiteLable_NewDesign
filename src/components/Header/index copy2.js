@@ -52,12 +52,20 @@ const Header = (props) => {
         upDateBalance();
     }
 
+    useEffect(()=>{
+        if(PlayerStatus && PlayerStatus.playerLogin){
+            setLoginBtn(false);
+            upDateBalance();
+        }
+
+    },[playerInfo])
+
     const onLogOut = () => {
         onUserLogout();
     }
 
     useEffect(async () => {
-        PubSub.subscribe('OpenLoginSucsses', onLoginSucsses);
+        //PubSub.subscribe('OpenLoginSucsses', onLoginSucsses);
         PubSub.subscribe('SideMEnuLogOut', onLogOut);
         await getSessionDetails();
         // const res = await getRegistrationInfo();
@@ -247,8 +255,8 @@ const mapStateToProps = (state) => {
     return {
         // menuObj: state.StaticDataReducer.menuObj,
         appConfigObj: state.StaticDataReducer.appConfigObj,
-        regConfigObj: state.StaticDataReducer.regConfigObj
-        // playerInfo: state.StaticDataReducer.playerInfo
+        regConfigObj: state.StaticDataReducer.regConfigObj,
+         playerInfo: state.StaticDataReducer.playerInfo
     };
 };
 
